@@ -19,16 +19,32 @@ def main():
     
     not_following_back = following - followers
     not_followed_back = followers - following
-    
-    with open("instagram_follow_analysis.csv", "w", newline="") as file:
-        writer = csv.writer(file)
-        writer.writerow(["Not Following Me Back"])
-        writer.writerows([[user] for user in not_following_back])
-        writer.writerow([])
-        writer.writerow(["I’m Not Following Back"])
-        writer.writerows([[user] for user in not_followed_back])
-    
-    print("Done! Results saved in 'instagram_follow_analysis.csv'")
+
+    # Display results in the console
+    print("Not Following Me Back:")
+    for user in not_followed_back:
+        print(user)
+
+    print("\nI'm Not Following Back:")
+    for user in not_following_back:
+        print(user)
+
+    # Ask user if they want to save the results as CSV
+    save_option = input("\nDo you want to save the results as a CSV file? (yes/no): ").strip().lower()
+
+    if save_option == "yes":
+        # Save results to CSV
+        with open("instagram_follow_analysis.csv", "w", newline="") as file:
+            writer = csv.writer(file)
+            writer.writerow(["Not Following Me Back"])
+            writer.writerows([[user] for user in not_followed_back])
+            writer.writerow([])  # Blank row
+            writer.writerow(["I'm Not Following Back"])
+            writer.writerows([[user] for user in not_following_back])
+        
+        print("Results saved in 'instagram_follow_analysis.csv'.")
+    else:
+        print("Results not saved.")
 
 if __name__ == "__main__":
     main()
